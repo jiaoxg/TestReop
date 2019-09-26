@@ -29,7 +29,9 @@ pipeline {
         }
         stage('parally') {
           steps {
-            sh 'echo "hello"'
+            sh '''./jenkins/build.sh
+
+'''
           }
         }
       }
