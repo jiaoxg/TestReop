@@ -2,22 +2,9 @@ pipeline {
   agent any
   stages {
     stage('stage 1') {
-      parallel {
-        stage('stage 1') {
-          steps {
-            sh './jenkins/build.sh'
-          }
-        }
-        stage('stage 3') {
-          steps {
-            echo 'hello world'
-          }
-        }
-        stage('error') {
-          steps {
-            echo 'hello'
-          }
-        }
+      steps {
+        sh './jenkins/build.sh'
+        archiveArtifacts 'target/startup.jar'
       }
     }
     stage('error') {
@@ -29,7 +16,7 @@ pipeline {
         }
         stage('parally') {
           steps {
-            sh '''./jenkins/build.sh
+            sh '''./jenkins/testall.sh
 
 '''
           }
@@ -37,8 +24,17 @@ pipeline {
       }
     }
     stage('End') {
-      steps {
-        sleep 2
+      parallel {
+        stage('End') {
+          steps {
+            sleep 2
+          }
+        }
+        stage('') {
+          steps {
+            sh 'echo cd '
+          }
+        }
       }
     }
   }
