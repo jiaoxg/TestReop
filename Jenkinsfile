@@ -11,7 +11,7 @@ pipeline {
         stage('stage 3') {
           steps {
             echo 'hello world'
-            timeout(time: 1)
+            timeout(time: 5, activity: true)
           }
         }
         stage('error') {
