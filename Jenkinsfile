@@ -13,16 +13,21 @@ pipeline {
             echo 'hello world'
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             echo 'hello'
           }
         }
       }
     }
-    stage('') {
+    stage('error') {
       steps {
         echo 'PRT "hello world"'
+      }
+    }
+    stage('End') {
+      steps {
+        sleep 2
       }
     }
   }
