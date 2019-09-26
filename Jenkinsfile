@@ -11,6 +11,7 @@ pipeline {
         stage('stage 3') {
           steps {
             echo 'hello world'
+            timeout(time: 1)
           }
         }
         stage('error') {
@@ -21,8 +22,17 @@ pipeline {
       }
     }
     stage('error') {
-      steps {
-        echo 'PRT "hello world"'
+      parallel {
+        stage('error') {
+          steps {
+            echo 'PRT "hello world"'
+          }
+        }
+        stage('parally') {
+          steps {
+            sh 'echo "hello"'
+          }
+        }
       }
     }
     stage('End') {
