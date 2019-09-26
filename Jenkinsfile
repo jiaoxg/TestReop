@@ -5,7 +5,7 @@ pipeline {
       parallel {
         stage('stage 1') {
           steps {
-            sleep 19
+            sh './jenkins/build.sh'
           }
         }
         stage('stage 3') {
