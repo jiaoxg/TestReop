@@ -2,9 +2,18 @@ pipeline {
   agent any
   stages {
     stage('stage 1') {
-      steps {
-        sh './jenkins/build.sh'
-        archiveArtifacts 'target/startup.jar'
+      parallel {
+        stage('stage 1') {
+          steps {
+            sh './jenkins/build.sh'
+            archiveArtifacts 'target/startup.jar'
+          }
+        }
+        stage('archive') {
+          steps {
+            archiveArtifacts './deploy/startup.jar'
+          }
+        }
       }
     }
     stage('error') {
@@ -30,7 +39,7 @@ pipeline {
             sleep 2
           }
         }
-        stage('') {
+        stage('error') {
           steps {
             sh 'echo cd '
           }
